@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
-    ufoLicenseKey: QVpQK25qVC8vLy8vQUFBQUtPSVAwNFpaYVVMN3BmeWN6RStDMXlpQ3JBdktFOXd1eDh5QVdrWWk3SzNOUlFkSUF3MnFzREM5em1WV3c1TlFjQmJmam5iaVROeXB1cEcwT29SaHZwMmt1QTE0c3JscU1MTGFQeVpCaTk3TmpwWjNRSjFVZTZLQ3VXQ3pwcWVTckRDZkI3U3Z0UUFMa1kzcW85Y1Y1ODY0b0V5cnFyK0pqSlhEMFIwUENKMnZYRkpWdDA5THBwSjR5ZXZvNDZMam0xMWRKb0NKVXY1N0t0bkllWmx3b3FFUmtsYjJVcEFsc3JPalcwSWMvaWhraGQ4ZDlGOWNLRWp0amhPa1B4ZVNhOVBwTGNHRFc0UEczL3NSeFgvTmFFMDc0SFNwUkFVL3JEMkxjVjE0UlBRWVZ4dTlZK3pnQlFpUTBPUUhPTHlxQnVGNVQrZUFHWnpIak5IREdkYWhDK3FzZVQwMExqekoxc0FtSldwWnkzeWI=
+    vuforiaLicenseKey: ATmHVZX/////AAABmT4xD8QrtkKjlRu4aimHRPIwFED6ANkPRx9SEmXriFstYY+Sw6DbyXzPYIo9g78eWQ/hoXUvjUPaOzyfaJfRJsqm1pbRkiSrBIcd4xFaeraNLGSSlWjAOmJSgaDN1JamGUEIrwUV25vxZvzfokRTw+vf6z51n/lj6WgDyAOMRuTAuNP+onJ+zhOwJ4e0IK1/8arxG0RjvwW9CyrBTuEF4dzlgO7RPaDu298FixTIC6yjb53xf5G5iR0qAzwgSVAVrvn1SKQn6h/78Ljjw9q+LGeoodxk1HQVBb5ss6NcOknwrEQ4KUR5S+Kv3kOEFTAm7Mql5lOmu/JrnvOp7EcCpDRu0d3uNPIiDnqVuy6cX9mu
+    ufoLicenseKey: QVhiM0Y1Ly8vLy8vQUFBQUtPbnFIeHJFSGs1N3VrMlg4U050eVBzK2pkOFZxMDhrazlwYjBsYS9aZUIxQlV1ckZWcWt0ZllSQWpnT2tIRlY2VzdOMDRTRjNYRUhmbTF5L1BnYlB4eWdHWEF6RUNheXowc3dyNVNYa2ozdERuRjhka1FpOHRscHdkMDcrcEJEY1FjTjNJcUM1bEgwOTYzQkdZdjRsQStRb0hSQU9nRGthelp5TlY0WHVwWU9EaE05NWw5bXAzbnBDMjM5MWZBWXBFdEdiL2loTDNab3N4b25ZblhjK1JtSS9wLzRoTDIwVGhmTXR6WFJNYkpUTXZLZzJoQ0N0TEJXNEptZ0pSOUtSdStzQWM3QjVNOWFFMGVHQ1dUT1VRSUUweEpiZC9ZL2cvS29iNDhBRXdQOGFwbWR5NmRWU0FHU2psVzRZY2FEU2Zud3J1ZHhucVNmSUZiajNTUnIzM0lKVlFIaW1rL0oyOGNFeDdyekcySXg=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
     maxSimultaneousObjectTargets: 1
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
-    version: 1.0.0
+    version: 8.3.8
     eulaAcceptedVersions: '{"Values":["8.3"]}'
   digitalEyewear:
     cameraOffset: 0.06
     distortionRenderingLayer: 31
-    eyewearType: 0
+    eyewearType: 1
     stereoFramework: 0
-    seeThroughConfiguration: 0
+    seeThroughConfiguration: 1
     viewerName: 
     viewerManufacturer: 
     useCustomViewer: 0
@@ -49,8 +49,9 @@ MonoBehaviour:
   videoBackground:
     clippingMode: 0
     numDivisions: 2
-    videoBackgroundShader: {fileID: 0}
-    matteShader: {fileID: 0}
+    videoBackgroundShader: {fileID: 4800000, guid: f40623b353e2f1943b1b3ba42975db7a,
+      type: 3}
+    matteShader: {fileID: 4800000, guid: 66d0d78a3000021448b598bb54a3bfdf, type: 3}
     videoBackgroundEnabled: 1
   deviceTracker:
     autoInitTracker: 0
