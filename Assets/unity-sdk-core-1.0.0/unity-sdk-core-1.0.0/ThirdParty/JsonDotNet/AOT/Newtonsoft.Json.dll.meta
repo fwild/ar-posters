@@ -12,22 +12,6 @@ PluginImporter:
   validateReferences: 1
   platformData:
   - first:
-      '': Any
-    second:
-      enabled: 0
-      settings:
-        Exclude Android: 0
-        Exclude Editor: 1
-        Exclude Linux: 1
-        Exclude Linux64: 1
-        Exclude LinuxUniversal: 1
-        Exclude OSXUniversal: 1
-        Exclude WebGL: 0
-        Exclude Win: 1
-        Exclude Win64: 1
-        Exclude WindowsStoreApps: 0
-        Exclude iOS: 0
-  - first:
       '': Linux
     second:
       enabled: 0
@@ -61,11 +45,11 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        CPU: ARMv7
+        CPU: AnyCPU
   - first:
       Any: 
     second:
-      enabled: 1
+      enabled: 0
       settings: {}
   - first:
       Editor: Editor
@@ -93,19 +77,7 @@ PluginImporter:
       settings:
         CPU: AnyCPU
   - first:
-      Standalone: Linux
-    second:
-      enabled: 0
-      settings:
-        CPU: x86
-  - first:
       Standalone: Linux64
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      Standalone: OSXUniversal
     second:
       enabled: 0
       settings:
@@ -133,16 +105,15 @@ PluginImporter:
       enabled: 1
       settings:
         CPU: AnyCPU
-        DontProcess: false
-        PlaceholderPath: 
-        SDK: UWP
+        DontProcess: False
+        PlaceholderPath: Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll
+        SDK: AnySDK
         ScriptingBackend: Il2Cpp
   - first:
       iPhone: iOS
     second:
       enabled: 1
       settings:
-        AddToEmbeddedBinaries: false
         CompileFlags: 
         FrameworkDependencies: 
   - first:

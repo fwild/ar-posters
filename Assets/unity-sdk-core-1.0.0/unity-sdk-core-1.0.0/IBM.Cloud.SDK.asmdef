@@ -1,12 +1,3 @@
-{
-    "name": "IBM.Cloud.SDK",
-    "references": [],
-    "optionalUnityReferences": [],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": []
+﻿{
+  "name": "IBM.Cloud.SDK"
 }
