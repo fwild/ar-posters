@@ -59,6 +59,8 @@ public class WatsonScript : MonoBehaviour
     private bool sessionCreated = false;
 
     public AudioSource audioObject;
+    public GameObject player;
+    Animator animator;
 
     //private fsSerializer _serializer = new fsSerializer();
 
@@ -77,6 +79,7 @@ public class WatsonScript : MonoBehaviour
     {
         LogSystem.InstallDefaultReactors();
         Runnable.Run(InitializeServices());
+        animator = player.GetComponent<Animator>();
     }
 
     private IEnumerator InitializeServices()
@@ -166,10 +169,18 @@ public class WatsonScript : MonoBehaviour
         if (!firstMessage)
         {
             //getIntent
-            string intent = response.Result.Output.Intents[0].Intent;
-
-            Debug.Log(intent);
-
+            if (response.Result.Output.Intents.Capacity > 0)
+            {
+                string intent = response.Result.Output.Intents[0].Intent;
+                Debug.Log(intent);
+                if (intent.Equals("General_Greetings"))
+                {
+                   animator.SetTrigger("WaveTrigger");
+                } if (intent.Equals("General_Ending"))
+                {
+                    animator.SetTrigger("WaveTrigger");
+                }
+            }
             //get Watson Output
             string outputText2 = response.Result.Output.Generic[0].Text;
 
