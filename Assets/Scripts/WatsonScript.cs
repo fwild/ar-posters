@@ -45,17 +45,17 @@ public class WatsonScript : MonoBehaviour
 
     #endregion
 
-    private int _recordingRoutine = 0;
-    private string _microphoneID = null;
-    private AudioClip _recording = null;
-    private int _recordingBufferSize = 2;
-    private int _recordingHZ = 22050;
-    private AssistantService _assistant;
-    private SpeechToTextService _speechToText;
-    private TextToSpeechService _textToSpeech;
+    private int recordingRoutine = 0;
+    private string microphoneID = null;
+    private AudioClip recording = null;
+    private int recordingBufferSize = 2;
+    private int recordingHZ = 22050;
+    private AssistantService assistant;
+    private SpeechToTextService speechToText;
+    private TextToSpeechService textToSpeech;
     private string sessionId;
     private bool firstMessage;
-    private bool _stopListeningFlag = false;
+    private bool stopListeningFlag = false;
     private bool sessionCreated = false;
 
     public AudioSource audioObject;
@@ -66,14 +66,6 @@ public class WatsonScript : MonoBehaviour
 
     public Dictionary<string, object> inputObj = new Dictionary<string, object>();
 
-    //Animator animator;
-
-    //Get your services up and running
-    //void Awake()
-    //{
-    //    Runnable.Run(InitializeServices());
-    //}
-
     // Use this for initialization
     private void Start()
     {
@@ -82,6 +74,7 @@ public class WatsonScript : MonoBehaviour
         animator = player.GetComponent<Animator>();
     }
 
+    //Authenticate services
     private IEnumerator InitializeServices()
     {
         //Assistant
@@ -95,13 +88,13 @@ public class WatsonScript : MonoBehaviour
         while (!assAuthenticator.CanAuthenticate())
             yield return null;
 
-        _assistant = new AssistantService(versionDate, assAuthenticator);
+        assistant = new AssistantService(versionDate, assAuthenticator);
         if (!string.IsNullOrEmpty(AssistantURL))
         {
-            _assistant.SetServiceUrl(AssistantURL);
+            assistant.SetServiceUrl(AssistantURL);
         }
 
-        _assistant.CreateSession(OnCreateSession, assistantId);
+        assistant.CreateSession(OnCreateSession, assistantId);
 
         while (!sessionCreated)
             yield return null;
@@ -117,10 +110,10 @@ public class WatsonScript : MonoBehaviour
         while (!TTSAuthenticator.CanAuthenticate())
             yield return null;
 
-        _textToSpeech = new TextToSpeechService(TTSAuthenticator);
+        textToSpeech = new TextToSpeechService(TTSAuthenticator);
         if (!string.IsNullOrEmpty(TextToSpeechURL))
         {
-            _textToSpeech.SetServiceUrl(TextToSpeechURL);
+            textToSpeech.SetServiceUrl(TextToSpeechURL);
         }
 
         //Speech To Text
@@ -135,12 +128,12 @@ public class WatsonScript : MonoBehaviour
         while (!STTAuthenticator.CanAuthenticate())
             yield return null;
 
-        _speechToText = new SpeechToTextService(STTAuthenticator);
+        speechToText = new SpeechToTextService(STTAuthenticator);
         if (!string.IsNullOrEmpty(SpeechToTextURL))
         {
-            _speechToText.SetServiceUrl(SpeechToTextURL);
+            speechToText.SetServiceUrl(SpeechToTextURL);
         }
-        _speechToText.StreamMultipart = true;
+        speechToText.StreamMultipart = true;
 
         Active = true;
 
@@ -160,10 +153,10 @@ public class WatsonScript : MonoBehaviour
             Text = "Hello"
         };
 
-        _assistant.Message(OnMessage, assistantId, sessionId, input);
+        assistant.Message(OnMessage, assistantId, sessionId, input);
     }
 
-
+    //Response from IBM Watson, and animation triggers based on intents
     private void OnMessage(DetailedResponse<MessageResponse> response, IBMError error)
     {
         if (!firstMessage)
@@ -176,7 +169,7 @@ public class WatsonScript : MonoBehaviour
                 if (intent.Equals("General_Greetings"))
                 {
                    animator.SetTrigger("WaveTrigger");
-                } if (intent.Equals("General_Ending"))
+                } else if (intent.Equals("General_Ending"))
                 {
                     animator.SetTrigger("WaveTrigger");
                 }
@@ -198,8 +191,7 @@ public class WatsonScript : MonoBehaviour
         {
             Text = spokenText
         };
-
-        _assistant.Message(OnMessage, assistantId, sessionId, input);
+        assistant.Message(OnMessage, assistantId, sessionId, input);
     }
 
     private void CallTextToSpeech(string outputText)
@@ -209,7 +201,7 @@ public class WatsonScript : MonoBehaviour
         byte[] synthesizeResponse = null;
         AudioClip clip = null;
 
-        _textToSpeech.Synthesize(
+        textToSpeech.Synthesize(
             callback: (DetailedResponse<byte[]> response, IBMError error) =>
             {
                 synthesizeResponse = response.Result;
@@ -229,8 +221,6 @@ public class WatsonScript : MonoBehaviour
 
         if (Application.isPlaying && clip != null)
         {
-            //GameObject audioObject = new GameObject("AudioObject");
-            //AudioSource source = audioObject.AddComponent<AudioSource>();
             audioObject.spatialBlend = 0.0f;
             audioObject.volume = 1.0f;
             audioObject.loop = false;
@@ -245,7 +235,7 @@ public class WatsonScript : MonoBehaviour
     private void RecordAgain()
     {
         Debug.Log("Played Audio received from Watson Text To Speech");
-        if (!_stopListeningFlag)
+        if (!stopListeningFlag)
         {
             OnListen();
         }
@@ -254,31 +244,29 @@ public class WatsonScript : MonoBehaviour
     private void OnListen()
     {
         Log.Debug("AvatarPattern.OnListen", "Start();");
-
         Active = true;
-
         StartRecording();
     }
 
     public bool Active
     {
-        get { return _speechToText.IsListening; }
+        get { return speechToText.IsListening; }
         set
         {
-            if (value && !_speechToText.IsListening)
+            if (value && !speechToText.IsListening)
             {
-                _speechToText.DetectSilence = true;
-                _speechToText.EnableWordConfidence = false;
-                _speechToText.EnableTimestamps = false;
-                _speechToText.SilenceThreshold = 0.03f;
-                _speechToText.MaxAlternatives = 1;
-                _speechToText.EnableInterimResults = true;
-                _speechToText.OnError = OnError;
-                _speechToText.StartListening(OnRecognize);
+                speechToText.DetectSilence = true;
+                speechToText.EnableWordConfidence = false;
+                speechToText.EnableTimestamps = false;
+                speechToText.SilenceThreshold = 0.03f;
+                speechToText.MaxAlternatives = 1;
+                speechToText.EnableInterimResults = true;
+                speechToText.OnError = OnError;
+                speechToText.StartListening(OnRecognize);
             }
-            else if (!value && _speechToText.IsListening)
+            else if (!value && speechToText.IsListening)
             {
-                _speechToText.StopListening();
+                speechToText.StopListening();
             }
         }
     }
@@ -307,22 +295,22 @@ public class WatsonScript : MonoBehaviour
 
     private void StartRecording()
     {
-        if (_recordingRoutine == 0)
+        if (recordingRoutine == 0)
         {
             Debug.Log("Started Recording");
             UnityObjectUtil.StartDestroyQueue();
-            _recordingRoutine = Runnable.Run(RecordingHandler());
+            recordingRoutine = Runnable.Run(RecordingHandler());
         }
     }
 
     private void StopRecording()
     {
-        if (_recordingRoutine != 0)
+        if (recordingRoutine != 0)
         {
             Debug.Log("Stopped Recording");
-            Microphone.End(_microphoneID);
-            Runnable.Stop(_recordingRoutine);
-            _recordingRoutine = 0;
+            Microphone.End(microphoneID);
+            Runnable.Stop(recordingRoutine);
+            recordingRoutine = 0;
         }
     }
 
@@ -342,23 +330,23 @@ public class WatsonScript : MonoBehaviour
 
     private IEnumerator RecordingHandler()
     {
-        _recording = Microphone.Start(_microphoneID, true, _recordingBufferSize, _recordingHZ);
+        recording = Microphone.Start(microphoneID, true, recordingBufferSize, recordingHZ);
         yield return null;      // let m_RecordingRoutine get set..
 
-        if (_recording == null)
+        if (recording == null)
         {
             StopRecording();
             yield break;
         }
 
         bool bFirstBlock = true;
-        int midPoint = _recording.samples / 2;
+        int midPoint = recording.samples / 2;
         float[] samples = null;
 
-        while (_recordingRoutine != 0 && _recording != null)
+        while (recordingRoutine != 0 && recording != null)
         {
-            int writePos = Microphone.GetPosition(_microphoneID);
-            if (writePos > _recording.samples || !Microphone.IsRecording(_microphoneID))
+            int writePos = Microphone.GetPosition(microphoneID);
+            if (writePos > recording.samples || !Microphone.IsRecording(microphoneID))
             {
                 Log.Error("MicrophoneWidget", "Microphone disconnected.");
 
@@ -371,14 +359,14 @@ public class WatsonScript : MonoBehaviour
             {
                 // front block is recorded, make a RecordClip and pass it onto our callback.
                 samples = new float[midPoint];
-                _recording.GetData(samples, bFirstBlock ? 0 : midPoint);
+                recording.GetData(samples, bFirstBlock ? 0 : midPoint);
 
                 AudioData record = new AudioData();
                 record.MaxLevel = Mathf.Max(samples);
-                record.Clip = AudioClip.Create("Recording", midPoint, _recording.channels, _recordingHZ, false);
+                record.Clip = AudioClip.Create("Recording", midPoint, recording.channels, recordingHZ, false);
                 record.Clip.SetData(samples, 0);
 
-                _speechToText.OnListen(record);
+                speechToText.OnListen(record);
 
                 bFirstBlock = !bFirstBlock;
             }
@@ -386,8 +374,8 @@ public class WatsonScript : MonoBehaviour
             {
                 // calculate the number of samples remaining until we ready for a block of audio,
                 // and wait that amount of time it will take to record.
-                int remaining = bFirstBlock ? (midPoint - writePos) : (_recording.samples - writePos);
-                float timeRemaining = (float)remaining / (float)_recordingHZ;
+                int remaining = bFirstBlock ? (midPoint - writePos) : (recording.samples - writePos);
+                float timeRemaining = (float)remaining / (float)recordingHZ;
 
                 yield return new WaitForSeconds(timeRemaining);
             }
