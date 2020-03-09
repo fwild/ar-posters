@@ -1,0 +1,12 @@
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\MSBuild\Output\obj\Dependencies\Release\net46\AR-Posters-Watson.Dependencies.msb4u.csprojAssemblyReference.cache
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\Editor\Microsoft.Windows.MixedReality.DotNetWinRT.Editor.asmdef
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\Editor\Microsoft.Windows.MixedReality.DotNetWinRT.Editor.asmdef.meta
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\Editor\Microsoft.Windows.MixedReality.DotNetWinRT.Init.cs
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\Editor\Microsoft.Windows.MixedReality.DotNetWinRT.Init.cs.meta
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\x64\MonoSupport.dll
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT\x64\MonoSupport.dll.meta
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT.dll.meta
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\System.Drawing.Primitives.dll.meta
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\Microsoft.Windows.MixedReality.DotNetWinRT.dll
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\Assets\Dependencies\net46\System.Drawing.Primitives.dll
+C:\Users\Rory\Documents\Work\3rd Year\Project\AR-Posters-Watson\MSBuild\Output\obj\Dependencies\Release\net46\AR-Posters-Watson.Dependencies.msb4u.csproj.CopyComplete

@@ -61,6 +61,7 @@ public class WatsonScript : MonoBehaviour
     public AudioSource audioObject;
     public GameObject player;
     Animator animator;
+    public GameObject GameManager;
 
     //private fsSerializer _serializer = new fsSerializer();
 
@@ -194,6 +195,15 @@ public class WatsonScript : MonoBehaviour
         assistant.Message(OnMessage, assistantId, sessionId, input);
     }
 
+    public void PassInteractionRequest(string text)
+    {
+        var input = new MessageInput()
+        {
+            Text = text
+        };
+        assistant.Message(OnMessage, assistantId, sessionId, input);
+    }
+
     private void CallTextToSpeech(string outputText)
     {
         Debug.Log("Sent to Watson Text To Speech: " + outputText);
@@ -284,6 +294,10 @@ public class WatsonScript : MonoBehaviour
                         StopRecording();
                         string text = alt.transcript;
                         Debug.Log("Watson hears : " + text + " Confidence: " + alt.confidence);
+                        if (text.Contains("fruit"))
+                        {
+                            GameManager.GetComponent<GameManager>().EnableFruit();
+                        }
                         BuildSpokenRequest(text);
                     }
                 }
